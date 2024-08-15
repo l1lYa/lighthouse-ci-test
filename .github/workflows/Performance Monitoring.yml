@@ -22,12 +22,12 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: lighthouse-report
-          path: ./lhci-report
+          path: ./lighthouse-results.zip
           
       - name: Download a Build Artifact
         uses: actions/download-artifact@v4.1.8
         with:
           # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
-          name: lhci-report
+          name: lighthouse-report
           # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
-          path: ./lhci-report
+          path: ./lighthouse-results.zip
