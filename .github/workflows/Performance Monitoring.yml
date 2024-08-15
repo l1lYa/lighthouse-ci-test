@@ -17,6 +17,7 @@ jobs:
             https://adventures:polaris@adventures.polaris-test.run/adventures/by-state-arizona/
           outputPath: './lhci-report'
           upload: 'false'
+          chromeFlags: '--no-sandbox'
 
       - name: Save Lighthouse Report
         uses: actions/upload-artifact@v2
