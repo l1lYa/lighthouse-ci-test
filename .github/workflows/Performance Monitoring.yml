@@ -1,0 +1,33 @@
+name: 'Performance Monitoring'
+on:
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v1
+        with:
+          urls: |
+            https://adventures:polaris@adventures.polaris-test.run/
+            https://adventures:polaris@adventures.polaris-test.run/adventures/by-state-arizona/
+          outputPath: './lhci-report'
+          upload: 'false'
+
+      - name: Save Lighthouse Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: lighthouse-report
+          path: ./lhci-report
+          
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v4.1.8
+        with:
+          # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
+          name: lhci-report
+          # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
+          path: ./lhci-report
